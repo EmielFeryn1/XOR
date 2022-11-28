@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  c2:
+    container_name: trainSite
+    image: c2:latest
+    pull_policy: build
+    ports:
+      - 5000:5000
+    volumes:
+      - TestVolume:/app
+  c1:
+    container_name: predictSite
+    image: c1:latest
+    pull_policy: build
+    build:
+      dockerfile: DockerfileVolume
+    ports:
+      - 5001:5000
+    volumes:
+      - TestVolume:/app
+volumes:
+  TestVolume:
+    external: false
+    name: TestVolume
